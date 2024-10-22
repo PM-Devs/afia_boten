@@ -1,12 +1,16 @@
 const express = require('express');
 const Groq = require("groq-sdk");
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import cors
 
 // Load environment variables from .env file
 dotenv.config();
 
 const groq = new Groq({ api_key: process.env.GROQ_API_KEY });
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -152,7 +156,7 @@ app.post('/chat', async (req, res) => {
 });
 
 // Set the server to listen on a port (for local development and Vercel)
-const port = process.env.PORT || 5600;
+const port = process.env.PORT || 10000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
